@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+
+$primary: #f2f2f2;
+$secondary: #3d4449;
+$highlight: #3282b8;
+$dtAvailable: #adff2f;
+$dtAway: #ffa07a;
+$dtOffline: #d3d3d3;
+
+@mixin datatableBtn {
+  background-color: darken($color: $secondary, $amount: 10%);
+  color: $primary;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+}
+
+.material-icons {
+  font-size: 16px;
+}
+
+.datatable {
+  &-container {
+    font-family: "Noto Sans", sans-serif;
+    background-color: $secondary;
+    border-radius: 3px;
+    color: $primary;
+    width: 900px;
+    margin: 0 auto;
+    font-size: 12px;
+  }
+
+  &-header {
+    border-bottom: solid 1px $primary;
+    padding: 12px;
+    display: flex;
+    align-items: baseline;
+
+    .search {
+      width: 30%;
+      input {
+        width: 100%;
+        display: block;
+        background-color: lighten($color: $secondary, $amount: 10%);
+        border: 1px solid lighten($color: $secondary, $amount: 10%);
+        border-radius: 3px;
+        box-sizing: border-box;
+        color: $primary;
+      }
+    }
+
+    .tools {
+      width: 70%;
+      ul {
+        margin: 0;
+        padding: 0;
+        display: inline-flex;
+        justify-content: start;
+        align-items: baseline;
+        li {
+          display: inline-block;
+          margin: 0 3px;
+          align-items: baseline;
+          button {
+            @include datatableBtn();
+            &:hover {
+              background-color: $highlight;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-body {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+      border-bottom: 2px solid lighten($color: $secondary, $amount: 10%);
+      font-size: 18px;
+    }
+
+    tbody {
+      tr {
+        td {
+          padding: 1em 2em;
+          font-size: 16px;
+          text-align: center;
+        }
+
+        &:hover {
+          background-color: $highlight;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &-footer {
+    padding: 12px;
+    display: flex;
+    align-items: baseline;
+
+    .list-items {
+      width: 50%;
+    }
+
+    .pages {
+      margin-left: auto;
+      margin-right: 0;
+      width: 50%;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: baseline;
+
+        li {
+          display: inline-flex;
+          margin: 0 3px;
+
+          .active {
+            padding: 5px 12px;
+          }
+
+          button {
+            @include datatableBtn();
+            &:hover {
+              background-color: $highlight;
+            }
+          }
+        }
+      }
+    }
+  }
+}
