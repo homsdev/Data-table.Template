@@ -29,12 +29,13 @@ $dtOffline: #d3d3d3;
     background-color: $secondary;
     border-radius: 3px;
     color: $primary;
-    width: 900px;
+    width: 985px;
     margin: 0 auto;
-    font-size: 12px;
+    font-size: 10px;
+    overflow-x: scroll;
   }
 
-  &-header {
+  &-tools {
     border-bottom: solid 1px $primary;
     padding: 12px;
     display: flex;
@@ -76,19 +77,37 @@ $dtOffline: #d3d3d3;
     }
   }
 
-  &-body {
-    width: 100%;
-    border-collapse: collapse;
 
-    thead {
+  &-wrapper{
+    width: 100%;
+    //display: block;
+    overflow-x: scroll;
+  }
+
+  &-content {
+    border-collapse: collapse;
+    thead{
+      width: calc( 200% - 1em );
+      display: table;
+      table-layout: fixed;
       border-bottom: 2px solid lighten($color: $secondary, $amount: 10%);
       font-size: 18px;
     }
 
     tbody {
-      tr {
-        td {
-          padding: 1em 2em;
+      display: block;
+      width:  200%;
+      height: 200px;
+      overflow-y: scroll;
+
+      tr{
+        display: table;
+        width: 100%;
+        height: 10px;
+        table-layout: fixed;
+        
+        td{
+          padding: .5em;
           font-size: 16px;
           text-align: center;
         }
