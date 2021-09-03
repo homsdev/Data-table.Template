@@ -98,7 +98,7 @@
 }
 
 .datatable-content thead {
-  width: calc( 200% - 1em);
+  width: calc(200% - 1em);
   display: table;
   table-layout: fixed;
   border-bottom: 2px solid #545e65;
@@ -109,7 +109,7 @@
   display: block;
   width: 200%;
   height: 200px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .datatable-content tbody tr {
@@ -120,9 +120,18 @@
 }
 
 .datatable-content tbody tr td {
-  padding: .5em;
+  max-width: 75px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0.5em;
   font-size: 16px;
   text-align: center;
+}
+
+.datatable-content tbody tr td abbr[title] {
+  border-bottom: none;
+  text-decoration: none;
 }
 
 .datatable-content tbody tr:hover {
@@ -195,5 +204,10 @@
 
 .datatable-footer .pages ul li button:hover {
   background-color: #3282b8;
+}
+
+abbr[title],
+acronym[title] {
+  border-bottom: none;
 }
 /*# sourceMappingURL=main.css.map */

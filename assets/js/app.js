@@ -1,3 +1,4 @@
+import { preserveData } from "./preserveData.js";
 const datatable = document.getElementById("dataTableId");
 const datatableBody = datatable.getElementsByTagName("tbody")[0];
 
@@ -18,29 +19,6 @@ const columns = [
   "Comments2",
 ];
 
-const preserveData = (dataBody, columns) => {
-  const dataArray = [];
-
-  for (const row of dataBody.children) {
-    let i = 0;
-    let dataCell = {};
-
-    if (columns.length > 0) {
-      for (const col of columns) {
-        dataCell[col] = "";
-      }
-    }
-
-    for (const key in dataCell) {
-      dataCell[key] = row.cells[i].innerHTML;
-      i++;
-    }
-    dataArray.push(dataCell);
-  }
-
-  return dataArray;
-};
-
 const data = preserveData(datatableBody, columns);
 
 cbTimeFrom.addEventListener("change", (e) => {
@@ -48,7 +26,6 @@ cbTimeFrom.addEventListener("change", (e) => {
   var timeTo = cbTimeTo.value;
 
   if (timeFrom !== "" && timeTo !== "") {
-    // console.log(`Realiza filtrado de ${timeFrom} a ${timeTo}`);
     let filteredArr = filterPerHour(
       data,
       timeFrom.concat(":00"),
@@ -64,7 +41,6 @@ cbTimeTo.addEventListener("change", (e) => {
   var timeTo = cbTimeTo.value;
 
   if (timeFrom !== "" && timeTo !== "") {
-    // console.log(`Realiza filtrado de ${timeFrom} a ${timeTo}`);
     let filteredArr = filterPerHour(
       data,
       timeFrom.concat(":00"),
@@ -79,7 +55,6 @@ function filterPerHour(data, timeFrom, timeTo) {
     let formatHour = new Date("01/01/2021 " + element.Hour).getHours();
     let dateFrom = new Date("01/01/2021 " + timeFrom).getHours();
     let dateTo = new Date("01/01/2021 " + timeTo).getHours();
-    // console.log(`actual: ${formatHour} From : ${dateFrom}  To: ${dateTo}`);
     if (formatHour >= dateFrom && formatHour <= dateTo) {
       return element;
     }
@@ -108,3 +83,22 @@ function sortItemsByHour(itemsArr) {
   });
   return sortedArr;
 }
+
+function popUpLargeText(tableBody) {
+  for (const row of tableBody.rows) {
+    for (const cell of row.cells) {
+      if (!cell.children.length > 0) {
+        if (cell.innerHTML.length > 15) {
+          let text = cell.innerHTML;
+          cell.innerHTML = "";
+          let abbr = document.createElement("abbr");
+          abbr.innerHTML = text;
+          abbr.setAttribute("title", text);
+          cell.appendChild(abbr);
+        }
+      }
+    }
+  }
+}
+
+popUpLargeText(datatableBody);
